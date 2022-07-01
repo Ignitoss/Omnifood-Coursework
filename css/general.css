@@ -15,6 +15,7 @@ Default: 1
 Small: 1.05
 Medium: 1.2
 Paragraph default: 1.6
+large: 1.8
 
 - Letter spacing
 -0.5px
@@ -26,15 +27,23 @@ Paragraph default: 1.6
 - Tints: 
 #fdf2e9
 #fae5d3
+#eb984e
 
-- Shades: #cf711f
+- Shades: 
+#cf711f
+#45260a
+
 - Accents:
 - Greys:
 #6f6f6f (lightest grey allowed on #fdf2e9)
 #555
 #333
+#888
+#767676 (lightest grey allowed on #fff)
 
 --- 05 SHADOWS ---
+
+0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
 
 ---06 BORDER-RADIUS ---
 Default: 9px
@@ -58,13 +67,20 @@ body {
   line-height: 1;
   font-weight: 400;
   color: #555;
+
+  /* Only works if there is nothing absolutely positioned to button */
+  overflow-x: hidden;
 }
 
 html {
   /* font-size: 10px; */
   /* Percentage of user's browser font-size setting */
-  font-size: 62.5%;
   /* 10px / 16px = 0.625 = 62.5% */
+  font-size: 62.5%;
+  overflow-x: hidden;
+
+  /* Does NOT work on Safari or MS Edge */
+  /* scroll-behavior: smooth; */
 }
 
 /* ********************************************************** */
@@ -82,6 +98,16 @@ html {
   display: grid;
   column-gap: 6.4rem;
   row-gap: 9.6rem;
+
+  /* margin-bottom: 9.6rem; */
+}
+
+/* .grid:last-child{
+  margin-bottom: 0;
+} */
+
+.grid:not(:last-child) {
+  margin-bottom: 9.6rem;
 }
 
 .grid--2-cols {
@@ -94,6 +120,10 @@ html {
 
 .grid--4-cols {
   grid-template-columns: repeat(4, 1fr);
+}
+
+.grid--5-cols {
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .grid--center-v {
@@ -122,7 +152,7 @@ html {
 
 .heading-tertiary {
   font-size: 3rem;
-  line-height: 1.2rem;
+  line-height: 1.2;
   margin-bottom: 3.2rem;
 }
 
@@ -136,6 +166,7 @@ html {
   letter-spacing: 0.75px;
 }
 
+.btn,
 .btn:link,
 .btn:visited {
   display: inline-block;
@@ -145,6 +176,11 @@ html {
   font-weight: 600;
   padding: 1.6rem 3.2rem;
   border-radius: 9px;
+
+  /* Only necessary for .btn */
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 
   /* Put transition on original "state" */
   /* transition: background-color 0.3s; */
@@ -177,6 +213,18 @@ html {
   box-shadow: inset 0 0 0 3px #fff;
 }
 
+.btn--form {
+  background-color: #45260a;
+  color: #fdf2e9;
+  align-self: end;
+  padding: 1.2rem;
+}
+
+.btn--form:hover {
+  background-color: #fff;
+  color: #555;
+}
+
 .link:link,
 .link:visited {
   display: inline-block;
@@ -205,12 +253,20 @@ html {
   display: flex;
   align-items: center;
   gap: 1.6rem;
+  line-height: 1.2;
 }
 
 .list-icon {
   width: 3rem;
   height: 3rem;
   color: #e67e22;
+}
+
+*:focus {
+  outline: none;
+  /* outline: 4px dotted #e67e22; */
+  /* outline-offset: 8px; */
+  box-shadow: 0 0 0 0.8rem rgba(230, 126, 34, 0.5);
 }
 
 /* HELPER/SETTINGS CLASSES */
